@@ -9,9 +9,8 @@ This service is consumed by the [Heroku Node.js buildpack](https://github.com/he
 - https://node-semver-service.heroku.com/0.10.x
 - https://node-semver-service.heroku.com/~0.10.x
 - https://node-semver-service.heroku.com/0.11.x
-- https://node-semver-service.heroku.com/>=0.11.5
 - https://node-semver-service.heroku.com/>0.4
-- https://node-semver-service.heroku.com/<0.8
+- https://node-semver-service.heroku.com/>=0.11.5
 - https://node-semver-service.heroku.com/*
 - https://node-semver-service.heroku.com/junk
 
