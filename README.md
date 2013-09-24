@@ -1,19 +1,19 @@
 # Node Semver Service
 
-> Give me a semver range and I'll give you a node version that satisfies.
+Give me a semver range and I'll give you a node version that satisfies.
 
 This service is consumed by the [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs).
 
 # Examples
 
-https://node-semver-service.heroku.com/0.10.x
-https://node-semver-service.heroku.com/~0.10.x
-https://node-semver-service.heroku.com/0.11.x
-https://node-semver-service.heroku.com/>=0.11.5
-https://node-semver-service.heroku.com/>0.4
-https://node-semver-service.heroku.com/<0.8
-https://node-semver-service.heroku.com/*
-https://node-semver-service.heroku.com/junk
+- https://node-semver-service.heroku.com/0.10.x
+- https://node-semver-service.heroku.com/~0.10.x
+- https://node-semver-service.heroku.com/0.11.x
+- https://node-semver-service.heroku.com/>=0.11.5
+- https://node-semver-service.heroku.com/>0.4
+- https://node-semver-service.heroku.com/<0.8
+- https://node-semver-service.heroku.com/*
+- https://node-semver-service.heroku.com/junk
 
 # Tests
 
