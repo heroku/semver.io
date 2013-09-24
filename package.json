@@ -1,7 +1,7 @@
 {
   "name": "node-semver-service",
   "version": "0.0.0",
-  "description": "Give me a semver string and I'll give you a node version that satisfies.",
+  "description": "Give me a semver range and I'll give you a node version that satisfies.",
   "main": "index.js",
   "dependencies": {
     "semver": "~2.1.0",
