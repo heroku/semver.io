@@ -1,0 +1,29 @@
+{
+  "name": "node-semver-service",
+  "version": "0.0.0",
+  "description": "Give me a semver string and I'll give you a node version that satisfies.",
+  "main": "index.js",
+  "dependencies": {
+    "semver": "~2.1.0",
+    "express": "~3.4.0",
+    "coffee-script": "~1.6.3",
+    "superagent": "~0.15.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
+  },
+  "scripts": {
+    "start": "coffee index.coffee",
+    "test": "foreman run test"
+  },
+  "keywords": [
+    "semver",
+    "node",
+    "npm",
+    "heroku",
+    "versions",
+    "engine"
+  ],
+  "author": "zeke",
+  "license": "MIT"
+}

@@ -1,0 +1,26 @@
+agent = require 'superagent'
+semver  = require 'semver'
+
+module.exports = class Resolver
+
+  constructor: (cb) ->
+    agent.get "http://nodejs.org/dist/", (page) =>
+      @all = page.text.
+        match(/[0-9]+\.[0-9]+\.[0-9]+/g).
+        sort (a,b) -> semver.compare(a, b)
+
+      @stables = page.text.
+        match(/[0-9]+\.[0-9]*[02468]\.[0-9]+/g).
+        sort (a,b) -> semver.compare(a, b)
+
+      @latest_unstable = @all[@all.length - 1]
+
+      @latest_stable = @stables[@stables.length - 1]
+
+      cb(@) if cb
+
+  satisfy: (range) ->
+    return @latest_stable unless semver.validRange(range)
+
+    semver.maxSatisfying(@stables, range) or semver.maxSatisfying(@all, range) or @latest_stable
+
