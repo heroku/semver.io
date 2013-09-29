@@ -10,6 +10,9 @@ module.exports = ->
 
   @app.resolver = new Resolver()
 
+  @app.get '/', (req, res, next) ->
+    res.send @app.resolver.latest_stable
+
   @app.get '/:range', (req, res, next) ->
     res.send @app.resolver.satisfy(req.params.range)
 
