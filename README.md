@@ -26,8 +26,7 @@ Resolver
   ✓ has a latest_unstable version
   ✓ honors explicit version strings
   ✓ matches common patterns to stable version
-  ✓ uses latest unstable version when request version is beyond stable version (51ms)
+  ✓ uses latest unstable version when request version is beyond stable version
   ✓ defaults to latest stable version when given crazy input
+  ✓ honors DEFAULT_VERSION_OVERRIDE environment variable, if present
 ```
-
-

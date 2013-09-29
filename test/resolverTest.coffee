@@ -43,3 +43,8 @@ describe "Resolver", ->
     # assert.equal r.latest_stable, r.satisfy("0.0")
     # assert.equal r.latest_stable, r.satisfy("2.0")
     assert.equal r.latest_stable, r.satisfy("snake-eyes")
+
+  it "honors DEFAULT_VERSION_OVERRIDE environment variable, if present", ->
+    assert.notEqual r.latest_stable, '0.10.17'
+    process.env.DEFAULT_VERSION_OVERRIDE = '0.10.0'
+    assert r.latest_stable, '0.10.17'
