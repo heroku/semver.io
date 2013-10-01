@@ -5,7 +5,7 @@ Give me a semver range and I'll give you a node version that satisfies.
 I consume [nodejs.org/dist/](http://nodejs.org/dist/) and am
 consumed by the [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs).
 
-# Examples
+## Examples
 
 - [/0.10.x](https://node-semver-service.heroku.com/0.10.x)
 - [/~0.10.x](https://node-semver-service.heroku.com/~0.10.x)
@@ -16,7 +16,7 @@ consumed by the [Heroku Node.js buildpack](https://github.com/heroku/heroku-buil
 - [/junk-string](https://node-semver-service.heroku.com/junk-string)
 - [/](https://node-semver-service.heroku.com/)
 
-# Caching
+## Caching
 
 This service is designed to work even if nodejs.org is down. If the GET request to
 [nodejs.org/dist/](http://nodejs.org/dist/) takes longer than 1000 ms, the repo's
@@ -26,7 +26,7 @@ This service is designed to work even if nodejs.org is down. If the GET request 
 npm run updateCache
 ```
 
-# Overriding the Default Stable Version
+## Overriding the Default Stable Version
 
 Occasionaly, a new version of Node.js will be released that world just isn't ready for.
 This could be a predictiable change like a bump in minor version from `0.8.25` to `0.10.0`,
@@ -43,7 +43,7 @@ When the dust settles and the world is ready for the real default:
 heroku sudo config:unset DEFAULT_VERSION_OVERRIDE -a node-semver-service
 ```
 
-# Tests
+## Tests
 
 ```
 npm test
