@@ -1,11 +1,10 @@
-# Node Semver Service
+# Node.js Semver Service
 
 This is a plain-text webservice that tracks all available versions of node on
 [nodejs.org/dist](http://nodejs.org/dist). Give it a [semver range](https://npmjs.org/doc/misc/semver.html#Ranges)
-and you'll get back a node version that satisfies.
-
-This service is used by the [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
-to resolve the `engines.node` in package.json files.
+and you'll get back a node version that satisfies. This service is used by the
+[Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
+to resolve the `engines.node` value in package.json files.
 
 ## Examples
 
@@ -30,16 +29,16 @@ npm run updateCache
 
 ## Overriding the Default Stable Version
 
-Occasionaly, a new version of Node.js will be released that world just isn't ready for.
+Occasionaly new versions of node are released that world just isn't ready for.
 This could be a predictiable change like a bump in minor version from `0.8.25` to `0.10.0`,
 or an [unexpectedly unstable release like `0.10.19`](https://github.com/joyent/node/issues/6263).
 To override the stable default version, use a config var:
 
 ```
-heroku sudo config:set DEFAULT_VERSION_OVERRIDE=0.10.17 -a node-semver-service
+heroku sudo config:set DEFAULT_VERSION_OVERRIDE=0.10.18 -a node-semver-service
 ```
 
-When the dust settles and the world is ready for the real default, remove the override:
+When the dust settles, remove the override:
 
 ```
 heroku sudo config:unset DEFAULT_VERSION_OVERRIDE -a node-semver-service
