@@ -1,21 +1,26 @@
-# Node.js Semver Service
+# semver.heroku.com
 
-This is a plain-text webservice that tracks all available versions of node on
-[nodejs.org/dist](http://nodejs.org/dist). Give it a [semver range](https://npmjs.org/doc/misc/semver.html#Ranges)
-and you'll get back a node version that satisfies. This service is used by the
+semver.heroku.com is a plain-text webservice that resolves [semver ranges]([semver range](https://npmjs.org/doc/misc/semver.html#Ranges).
+It is currently only implemented for the Node.js binary, but is designed to
+support any software that follows the [rules](http://semver.org/).
+
+semver.heroku.com is used by the
 [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
-to resolve the `engines.node` value in package.json files.
+to resolve `engines.node` in package.json files.
 
 ## Examples
 
-- [0.10.x](https://node-semver-service.heroku.com/0.10.x)
-- [~0.10.15](https://node-semver-service.heroku.com/~0.10.15)
-- [0.11.x](https://node-semver-service.heroku.com/0.11.x)
-- [>0.4](https://node-semver-service.heroku.com/>0.4)
-- [>=0.11.5](https://node-semver-service.heroku.com/>=0.11.5)
-- [*](https://node-semver-service.heroku.com/*)
-- [junk-string](https://node-semver-service.heroku.com/junk-string)
-- [_blank_](https://node-semver-service.heroku.com/)
+Node.js versions are resolved from [nodejs.org/dist](http://nodejs.org/dist).
+Give it a range and you'll get back a node version that satisfies.
+
+- [node](https://semver.heroku.com/node)
+- [node/0.10.x](https://semver.heroku.com/node/0.10.x)
+- [node/~0.10.15](https://semver.heroku.com/node/~0.10.15)
+- [node/0.11.x](https://semver.heroku.com/node/0.11.x)
+- [node/>0.4](https://semver.heroku.com/node/>0.4)
+- [node/>=0.11.5](https://semver.heroku.com/node/>=0.11.5)
+- [node/*](https://semver.heroku.com/node/*)
+- [node/junk-string](https://semver.heroku.com/node/junk-string)
 
 ## Caching
 
@@ -35,14 +40,20 @@ or an [unexpectedly unstable release like `0.10.19`](https://github.com/joyent/n
 To override the stable default version, use a config var:
 
 ```
-heroku sudo config:set DEFAULT_VERSION_OVERRIDE=0.10.18 -a node-semver-service
+heroku sudo config:set DEFAULT_VERSION_OVERRIDE=0.10.18 -a semver
 ```
 
 When the dust settles, remove the override:
 
 ```
-heroku sudo config:unset DEFAULT_VERSION_OVERRIDE -a node-semver-service
+heroku sudo config:unset DEFAULT_VERSION_OVERRIDE -a semver
 ```
+
+## What about npm versions?
+
+npm versions are not tracked because the node binary has shipped with npm
+included since node` 0.6.3`. The [buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
+ignores `engines.npm`, deferring to node for npm version resolution.
 
 ## Tests
 

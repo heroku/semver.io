@@ -1,7 +1,7 @@
 {
-  "name": "node-semver-service",
+  "name": "semver.io",
   "version": "0.0.0",
-  "description": "Give me a semver range and I'll give you a node version that satisfies.",
+  "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
     "semver": "~2.1.0",
@@ -11,13 +11,13 @@
   },
   "engines": {
     "node": "0.10.20"
-  }
+  },
   "devDependencies": {
     "mocha": "~1.13.0"
   },
   "scripts": {
     "start": "coffee index.coffee",
-    "test": "foreman run test",
+    "test": "mocha --compilers coffee:coffee-script",
     "updateCache": "curl http://nodejs.org/dist/ > cache.html"
   },
   "keywords": [
