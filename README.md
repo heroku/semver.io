@@ -1,6 +1,6 @@
 # semver.io
 
-semver.io is a plain-text webservice that resolves [semver ranges]([semver range](https://npmjs.org/doc/misc/semver.html#Ranges).
+semver.io is a plain-text webservice that resolves [semver ranges](https://npmjs.org/doc/misc/semver.html#Ranges).
 It is currently only implemented for Node.js, but is designed to
 support any software that follows the semver [rules](http://semver.org/).
 
