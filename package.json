@@ -18,7 +18,7 @@
   "scripts": {
     "start": "coffee index.coffee",
     "test": "mocha --compilers coffee:coffee-script",
-    "updateCache": "curl http://nodejs.org/dist/ > cache.html"
+    "updateCache": "curl http://nodejs.org/dist/ > cache/node.html"
   },
   "keywords": [
     "semver",

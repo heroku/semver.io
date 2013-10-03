@@ -1,10 +1,10 @@
-# semver.heroku.com
+# semver.io
 
-semver.heroku.com is a plain-text webservice that resolves [semver ranges]([semver range](https://npmjs.org/doc/misc/semver.html#Ranges).
-It is currently only implemented for the Node.js binary, but is designed to
-support any software that follows the [rules](http://semver.org/).
+semver.io is a plain-text webservice that resolves [semver ranges]([semver range](https://npmjs.org/doc/misc/semver.html#Ranges).
+It is currently only implemented for Node.js, but is designed to
+support any software that follows the semver [rules](http://semver.org/).
 
-semver.heroku.com is used by the
+semver.io is used by the
 [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
 to resolve `engines.node` in package.json files.
 
@@ -13,20 +13,20 @@ to resolve `engines.node` in package.json files.
 Node.js versions are resolved from [nodejs.org/dist](http://nodejs.org/dist).
 Give it a range and you'll get back a node version that satisfies.
 
-- [node](https://semver.heroku.com/node)
-- [node/0.10.x](https://semver.heroku.com/node/0.10.x)
-- [node/~0.10.15](https://semver.heroku.com/node/~0.10.15)
-- [node/0.11.x](https://semver.heroku.com/node/0.11.x)
-- [node/>0.4](https://semver.heroku.com/node/>0.4)
-- [node/>=0.11.5](https://semver.heroku.com/node/>=0.11.5)
-- [node/*](https://semver.heroku.com/node/*)
-- [node/junk-string](https://semver.heroku.com/node/junk-string)
+- [node](https://semver.io/node)
+- [node/0.10.x](https://semver.io/node/0.10.x)
+- [node/~0.10.15](https://semver.io/node/~0.10.15)
+- [node/0.11.x](https://semver.io/node/0.11.x)
+- [node/>0.4](https://semver.io/node/>0.4)
+- [node/>=0.11.5](https://semver.io/node/>=0.11.5)
+- [node/*](https://semver.io/node/*)
+- [node/junk-string](https://semver.io/node/junk-string)
 
 ## Caching
 
-This service is designed to work even if nodejs.org is down. If the GET request to
+semver.io is designed to work even if nodejs.org is down. If the GET request to
 [nodejs.org/dist/](http://nodejs.org/dist/) takes too long to resolve, this repo's
-`cache.html` file will be loaded instead. To update the cached file, run:
+`cache/node.html` file will be loaded instead. To update the cached file, run:
 
 ```
 npm run updateCache

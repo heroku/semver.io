@@ -35,7 +35,7 @@ module.exports = class Resolver
   downloadVersions: (cb) ->
     agent.get("http://nodejs.org/dist/").timeout(Resolver.timeout).end (err, res) ->
       # Use the cached file if request timed out.
-      return cb null, fs.readFileSync('cache.html').toString() if err
+      return cb null, fs.readFileSync('cache/node.html').toString() if err
       cb null, res.text
 
   satisfy: (range) ->
