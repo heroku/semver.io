@@ -78,3 +78,9 @@ describe "Resolver", ->
       r = new Resolver ->
         assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
         done()
+
+    it "honors specific versions that are newer than the override version", (done) ->
+      process.env.DEFAULT_VERSION_OVERRIDE = '0.10.18'
+      r = new Resolver ->
+        assert.equal r.satisfy('0.10.19'), '0.10.19'
+        done()
