@@ -22,9 +22,9 @@ module.exports = class Resolver
         sort (a,b) -> semver.compare(a, b)
 
       # remove any stable versions greater than the override
-      if process.env.DEFAULT_VERSION_OVERRIDE
+      if process.env.STABLE_NODE_VERSION
         @stables = @stables.filter (version) ->
-          semver.lte version, process.env.DEFAULT_VERSION_OVERRIDE
+          semver.lte version, process.env.STABLE_NODE_VERSION
 
       @latest_unstable = @all[@all.length - 1]
 

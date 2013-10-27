@@ -26,7 +26,7 @@ Give it a range and you'll get back a node version that satisfies.
 
 semver.io is designed to work even if nodejs.org is down. If the GET request to
 [nodejs.org/dist/](http://nodejs.org/dist/) takes too long to resolve, this repo's
-`cache/node.html` file will be loaded instead. To update the cached file, run:
+`cache/node.html` file will be loaded instead. To update the repo's cached file, run:
 
 ```
 npm run updateCache
@@ -34,19 +34,19 @@ npm run updateCache
 
 ## Overriding the Default Stable Version
 
-Occasionaly new versions of node are released that world just isn't ready for.
+Occasionaly new versions of node are released on nodejs.org that the world just isn't ready for.
 This could be a predictiable change like a bump in minor version from `0.8.25` to `0.10.0`,
 or an [unexpectedly unstable release like `0.10.19`](https://github.com/joyent/node/issues/6263).
 To override the stable default version, use a config var:
 
 ```
-heroku sudo config:set DEFAULT_VERSION_OVERRIDE=0.10.18 -a semver
+heroku config:set STABLE_NODE_VERSION=0.10.18 -a semver
 ```
 
 When the dust settles, remove the override:
 
 ```
-heroku sudo config:unset DEFAULT_VERSION_OVERRIDE -a semver
+heroku config:unset STABLE_NODE_VERSION -a semver
 ```
 
 ## What about npm versions?
