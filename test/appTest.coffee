@@ -1,4 +1,4 @@
 assert = require "assert"
 # request = require "supertest"
 
-app = require('../lib/app')()
+# app = require('../lib/app')()
