@@ -7,7 +7,8 @@
     "semver": "~2.1.0",
     "express": "~3.4.0",
     "coffee-script": "~1.6.3",
-    "superagent": "~0.15.4"
+    "superagent": "~0.15.4",
+    "newrelic": "~1.0.0"
   },
   "engines": {
     "node": "0.10.20"
