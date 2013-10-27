@@ -1,10 +1,12 @@
 express = require 'express'
+logfmt  = require 'logfmt'
 Resolver = require './resolver'
 
 module.exports = ->
 
   @app = express()
   @app.configure =>
+    @app.use logfmt.requestLogger() unless process.env.NODE_ENV is "test"
     @app.use express.bodyParser()
     @app.use @app.router
 
