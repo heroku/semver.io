@@ -4,7 +4,9 @@ fs = require 'fs'
 
 module.exports = class Resolver
 
-  @timeout: 1000
+  # Keep the timeout really short so tests will use the cached
+  # file instead of hitting the network.
+  @timeout: (if process.env.NODE_ENV is 'test' then 1 else 1000)
 
   constructor: (cb) ->
 

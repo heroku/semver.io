@@ -1,2 +1,5 @@
 require('newrelic')
-require('./lib/app').listen(process.env.PORT or 5000)
+app = require('./lib/app')
+
+app.start ->
+  app.listen(process.env.PORT or 5000)
