@@ -1,14 +1,18 @@
 # semver.io
 
 semver.io is a plain-text webservice that resolves [semver ranges](https://npmjs.org/doc/misc/semver.html#Ranges).
-It is currently only implemented for Node.js, but is designed to
-support any software that follows the semver [rules](http://semver.org/).
 
-Node.js versions are resolved from [nodejs.org/dist](http://nodejs.org/dist).
+semver.io syncs Node.js versions from [nodejs.org/dist](http://nodejs.org/dist).
 
 semver.io is used by the
 [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
 to resolve `engines.node` in package.json files.
+
+semver.io is open source and available on
+GitHub at [heroku/semver](https://github.com/heroku/semver).
+
+semver.io is currently only implemented for Node.js, but is designed to
+support any software that follows the semver [rules](http://semver.org/).
 
 ## Examples
 
