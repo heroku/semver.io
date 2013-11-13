@@ -10,7 +10,10 @@
     "superagent": "~0.15.4",
     "newrelic": "~1.0.0",
     "logfmt": "~0.15.0",
-    "supertest": "~0.8.0"
+    "supertest": "~0.8.0",
+    "lodash": "~2.3.0",
+    "array-sugar": "~0.2.4",
+    "marked": "~0.2.10"
   },
   "engines": {
     "node": "0.10.20"

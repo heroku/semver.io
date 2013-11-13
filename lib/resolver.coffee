@@ -1,6 +1,8 @@
+require 'array-sugar'
 agent = require 'superagent'
 semver  = require 'semver'
 fs = require 'fs'
+_ = require 'lodash'
 
 module.exports = class Resolver
 
@@ -14,23 +16,25 @@ module.exports = class Resolver
       return console.error("err", err) if err
 
       # Extract and sort version numbers from HTML text
-      @all = text.
+      @all = _.uniq(text.
         match(/[0-9]+\.[0-9]+\.[0-9]+/g).
         sort (a,b) -> semver.compare(a, b)
+      )
 
       # Stable releases have even-numbered minor versions
-      @stables = text.
+      @stables = _.uniq(text.
         match(/[0-9]+\.[0-9]*[02468]\.[0-9]+/g).
         sort (a,b) -> semver.compare(a, b)
+      )
 
-      # remove any stable versions greater than the override
+      # take any versions greater than the override out of the stables array
       if process.env.STABLE_NODE_VERSION
         @stables = @stables.filter (version) ->
           semver.lte version, process.env.STABLE_NODE_VERSION
 
-      @latest_unstable = @all[@all.length - 1]
+      @latest_unstable = @all.last
 
-      @latest_stable = @stables[@stables.length - 1]
+      @latest_stable = @stables.last
 
       cb(@) if cb
 

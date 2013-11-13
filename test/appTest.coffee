@@ -10,17 +10,16 @@ before (done) ->
 
 describe "GET /", ->
 
-  it "redirects to github", (done) ->
+  it "renders a readme", (done) ->
     supertest(app)
       .get("/")
-      .expect(302)
-      .expect('location', 'https://github.com/heroku/semver#readme', done)
+      .expect(200, done)
 
-describe "GET /node", ->
+describe "GET /node/stable", ->
 
   it "returns a node version", (done) ->
     supertest(app)
-      .get("/node")
+      .get("/node/stable")
       .expect(200)
       .expect('Content-Type', /text\/plain/)
       .end (err, res) ->
@@ -28,23 +27,11 @@ describe "GET /node", ->
         assert semver.valid(res.text)
         done()
 
-describe "GET /node/null", ->
-
-  it "returns a node version", (done) ->
-    supertest(app)
-      .get("/node")
-      .expect(200)
-      .expect('Content-Type', /text\/plain/)
-      .end (err, res) ->
-        return done(err) if err
-        assert semver.valid(res.text)
-        done()
-
-describe "GET /node/0.8.x", ->
+describe "GET /node/resolve/0.8.x", ->
 
   it "returns a 0.8 node version", (done) ->
     supertest(app)
-      .get("/node/0.8.x")
+      .get("/node/resolve/0.8.x")
       .expect(200)
       .expect('Content-Type', /text\/plain/)
       .end (err, res) ->
@@ -53,11 +40,11 @@ describe "GET /node/0.8.x", ->
         assert.equal semver.parse(res.text).minor, 8
         done()
 
-describe "GET /node/~0.10.15", ->
+describe "GET /node/resolve/~0.10.15", ->
 
   it "returns a 0.10 node version", (done) ->
     supertest(app)
-      .get("/node/0.10.x")
+      .get("/node/resolve/0.10.x")
       .expect(200)
       .expect('Content-Type', /text\/plain/)
       .end (err, res) ->
@@ -67,22 +54,14 @@ describe "GET /node/~0.10.15", ->
         assert (semver.parse(res.text).patch > 20)
         done()
 
-describe "GET /node/0.11.5", ->
+describe "GET /node/resolve/0.11.5", ->
 
   it "returns the exact version requested", (done) ->
     supertest(app)
-      .get("/node/0.11.5")
+      .get("/node/resolve/0.11.5")
       .expect(200)
       .expect('Content-Type', /text\/plain/)
       .end (err, res) ->
         return done(err) if err
         assert.equal res.text, "0.11.5"
         done()
-
-describe "GET /foo", ->
-
-  it "redirects to github", (done) ->
-    supertest(app)
-      .get("/")
-      .expect(302)
-      .expect('location', 'https://github.com/heroku/semver#readme', done)

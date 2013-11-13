@@ -4,23 +4,27 @@ semver.io is a plain-text webservice that resolves [semver ranges](https://npmjs
 It is currently only implemented for Node.js, but is designed to
 support any software that follows the semver [rules](http://semver.org/).
 
+Node.js versions are resolved from [nodejs.org/dist](http://nodejs.org/dist).
+
 semver.io is used by the
 [Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
 to resolve `engines.node` in package.json files.
 
 ## Examples
 
-Node.js versions are resolved from [nodejs.org/dist](http://nodejs.org/dist).
-Give it a range and you'll get back a node version that satisfies.
+Get the latest version of node that satisfies a given semver range:
 
-- [node](https://semver.io/node)
-- [node/0.10.x](https://semver.io/node/0.10.x)
-- [node/~0.10.15](https://semver.io/node/~0.10.15)
-- [node/0.11.x](https://semver.io/node/0.11.x)
-- [node/>0.4](https://semver.io/node/>0.4)
-- [node/>=0.11.5](https://semver.io/node/>=0.11.5)
-- [node/*](https://semver.io/node/*)
-- [node/junk-string](https://semver.io/node/junk-string)
+- [node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
+- [node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
+- [node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
+- [node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
+- [node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
+
+These routes are also provided for convenience:
+
+- [/node/stable](https://semver.io/node/stable)
+- [/node/unstable](https://semver.io/node/unstable)
+- [/node/versions](https://semver.io/node/versions)
 
 ## Caching
 
