@@ -18,17 +18,17 @@ support any software that follows the semver [rules](http://semver.org/).
 
 Get the latest version of node that satisfies a given semver range:
 
-- [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
-- [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
-- [/node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
-- [/node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
-- [/node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
+- [/node/resolve/0.10.x](http://semver.io/node/resolve/0.10.x)
+- [/node/resolve/0.11.x](http://semver.io/node/resolve/>=0.11.5)
+- [/node/resolve/~0.10.15](http://semver.io/node/resolve/~0.10.15)
+- [/node/resolve/>0.4](http://semver.io/node/resolve/>0.4)
+- [/node/resolve/>=0.8.5 <=0.8.14](http://semver.io/node/resolve/>=0.8.5 <=0.8.14)
 
 These routes are also provided for convenience:
 
-- [/node/stable](https://semver.io/node/stable)
-- [/node/unstable](https://semver.io/node/unstable)
-- [/node/versions](https://semver.io/node/versions)
+- [/node/stable](http://semver.io/node/stable)
+- [/node/unstable](http://semver.io/node/unstable)
+- [/node/versions](http://semver.io/node/versions)
 
 ## JSON Endpoint
 
