@@ -2,7 +2,8 @@ express = require 'express'
 marked = require 'marked'
 logfmt  = require 'logfmt'
 fs  = require 'fs'
-Resolver = require './resolver'
+cors = require 'cors'
+Resolver = require 'node-version-resolver'
 
 module.exports = app = express()
 
@@ -17,7 +18,6 @@ app.start = (cb) =>
   app.resolver = new Resolver(cb)
 
 app.get '/', (req, res, next) ->
-  # res.redirect 'https://github.com/heroku/semver#readme'
   res.send(marked(fs.readFileSync("./README.md").toString()))
 
 app.get '/node', (req, res, next) ->
@@ -40,5 +40,8 @@ app.get '/node/versions', (req, res, next) ->
   res.type 'text'
   res.send app.resolver.all.join("\n")
 
-app.get '/:range', (req, res, next) ->
-  res.redirect 'https://github.com/heroku/semver#readme'
+app.get '/node.json', cors(), (req, res, next) ->
+  res.json
+    stable: app.resolver.latest_stable
+    unstable: app.resolver.latest_unstable
+    versions: app.resolver.all

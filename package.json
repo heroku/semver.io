@@ -4,27 +4,24 @@
   "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
-    "semver": "~2.1.0",
     "express": "~3.4.0",
     "coffee-script": "~1.6.3",
-    "superagent": "~0.15.4",
     "newrelic": "~1.0.0",
     "logfmt": "~0.15.0",
     "supertest": "~0.8.0",
-    "lodash": "~2.3.0",
-    "array-sugar": "~0.2.4",
-    "marked": "~0.2.10"
+    "marked": "~0.2.10",
+    "node-version-resolver": "~0.1.0",
+    "cors": "~2.1.0"
   },
   "engines": {
-    "node": "0.10.20"
+    "node": "0.10.22"
   },
   "devDependencies": {
     "mocha": "~1.13.0"
   },
   "scripts": {
     "start": "coffee index.coffee",
-    "test": "foreman run test",
-    "updateCache": "curl http://nodejs.org/dist/ > cache/node.html"
+    "test": "foreman run test"
   },
   "keywords": [
     "semver",

@@ -18,17 +18,36 @@ support any software that follows the semver [rules](http://semver.org/).
 
 Get the latest version of node that satisfies a given semver range:
 
-- [node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
-- [node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
-- [node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
-- [node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
-- [node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
+- [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
+- [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
+- [/node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
+- [/node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
+- [/node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
 
 These routes are also provided for convenience:
 
 - [/node/stable](https://semver.io/node/stable)
 - [/node/unstable](https://semver.io/node/unstable)
 - [/node/versions](https://semver.io/node/versions)
+
+## JSON Endpoint
+
+There's also a CORS-friendly HTTP endpoint at
+[semver.io/node.json](http://semver.io/node.json) that gives you the whole kit
+and caboodle:
+
+```js
+{
+  stable: "0.10.22",
+  unstable: "0.11.8",
+  versions: [
+    "0.0.1",
+    "0.0.2",
+    "0.0.3",
+    "..."
+  ]
+}
+```
 
 ## Caching
 
@@ -68,19 +87,21 @@ ignores `engines.npm`, deferring to node for npm version resolution.
 ```
 npm test
 
-Resolver
-  initialization
-    ✓ has an array of all versions
-    ✓ has an array of stable versions
-    ✓ has a latest_stable version
-    ✓ has a latest_unstable version
-    ✓ defaults to latest stable version when given crazy input
-  satisfy()
-    ✓ honors explicit version strings
-    ✓ matches common patterns to stable version
-    ✓ uses latest unstable version when request version is beyond stable version
-  override
-    ✓ becomes latest_stable
-    ✓ satisfies stable-seeking ranges
-    ✓ still resolves unstable ranges
+GET /
+  ✓ renders the readme
+
+GET /node/stable
+  ✓ returns a stable node version
+
+GET /node/unstable
+  ✓ returns an unstable node version
+
+GET /node/resolve/0.8.x
+  ✓ returns a 0.8 node version
+
+GET /node/resolve/~0.10.15
+  ✓ returns a 0.10 node version
+
+GET /node/resolve/0.11.5
+  ✓ returns the exact version requested
 ```

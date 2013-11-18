@@ -10,14 +10,14 @@ before (done) ->
 
 describe "GET /", ->
 
-  it "renders a readme", (done) ->
+  it "renders the readme", (done) ->
     supertest(app)
       .get("/")
       .expect(200, done)
 
 describe "GET /node/stable", ->
 
-  it "returns a node version", (done) ->
+  it "returns a stable node version", (done) ->
     supertest(app)
       .get("/node/stable")
       .expect(200)
@@ -25,6 +25,20 @@ describe "GET /node/stable", ->
       .end (err, res) ->
         return done(err) if err
         assert semver.valid(res.text)
+        assert.equal semver.parse(res.text).minor%2, 0
+        done()
+
+describe "GET /node/unstable", ->
+
+  it "returns an unstable node version", (done) ->
+    supertest(app)
+      .get("/node/unstable")
+      .expect(200)
+      .expect('Content-Type', /text\/plain/)
+      .end (err, res) ->
+        return done(err) if err
+        assert semver.valid(res.text)
+        assert.equal semver.parse(res.text).minor%2, 1
         done()
 
 describe "GET /node/resolve/0.8.x", ->
