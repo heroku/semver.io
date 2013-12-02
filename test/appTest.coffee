@@ -79,3 +79,15 @@ describe "GET /node/resolve/0.11.5", ->
         return done(err) if err
         assert.equal res.text, "0.11.5"
         done()
+
+describe "GET /node/resolve?range=0.8.x", ->
+
+  it "allows range as a query param", (done) ->
+    supertest(app)
+      .get("/node/resolve?range=0.8.x")
+      .expect(200)
+      .expect('Content-Type', /text\/plain/)
+      .end (err, res) ->
+        return done(err) if err
+        assert.equal semver.parse(res.text).minor, 8
+        done()

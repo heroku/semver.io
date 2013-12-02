@@ -28,6 +28,10 @@ app.get '/node/resolve/:range', (req, res, next) ->
   res.type 'text'
   res.send app.resolver.satisfy(req.params.range)
 
+app.get '/node/resolve', (req, res, next) ->
+  res.type 'text'
+  res.send app.resolver.satisfy(req.query.range)
+
 app.get '/node/stable', (req, res, next) ->
   res.type 'text'
   res.send app.resolver.latest_stable
