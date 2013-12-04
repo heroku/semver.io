@@ -1,7 +1,7 @@
 # semver.io
 
 semver.io is a plaintext and JSON webservice that tracks [all available versions of node.js](http://nodejs.org/dist) and uses that version info to resolve [semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges). It's used by heroku's
-[node buildpack](https://github.com/heroku/heroku-buildpack-nodejs/blob/5754e60de7b8472d5070c9b713a898d353845c68/bin/compile#L18-22) and is open-sourced [on github](https://github.com/heroku/semver).
+[node buildpack](https://github.com/heroku/heroku-buildpack-nodejs/blob/5754e60de7b8472d5070c9b713a898d353845c68/bin/compile#L18-22) and is open-sourced [on github](https://github.com/heroku/semver.io).
 
 ## On the command line
 
