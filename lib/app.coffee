@@ -1,5 +1,5 @@
 express = require 'express'
-marked = require 'marked'
+marked = require './marked'
 logfmt  = require 'logfmt'
 fs  = require 'fs'
 cors = require 'cors'
@@ -18,7 +18,13 @@ app.start = (cb) =>
   app.resolver = new Resolver(cb)
 
 app.get '/', (req, res, next) ->
-  res.send(marked(fs.readFileSync("./README.md").toString()))
+  layout = fs.readFileSync("./public/layout.html").toString()
+  readme = fs.readFileSync("./README.md").toString()
+  # marked must be used in an async fashion here to enable
+  # pygments code syntax highlighting.
+  marked readme, (err, content) ->
+    throw err if err
+    res.send layout.replace("{{content}}", content)
 
 app.get '/node', (req, res, next) ->
   res.type 'text'

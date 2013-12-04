@@ -1,38 +1,24 @@
 # semver.io
 
-semver.io is a plain-text webservice that resolves [semver ranges](https://npmjs.org/doc/misc/semver.html#Ranges).
+semver.io is a plaintext and JSON webservice that tracks [all available versions of node.js](http://nodejs.org/dist) and uses that version info to resolve [semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges). It's used by heroku's
+[node buildpack](https://github.com/heroku/heroku-buildpack-nodejs/blob/5754e60de7b8472d5070c9b713a898d353845c68/bin/compile#L18-22) and is open-sourced [on github](https://github.com/heroku/semver).
 
-semver.io syncs Node.js versions from [nodejs.org/dist](http://nodejs.org/dist).
+## On the command line
 
-semver.io is used by the
-[Heroku Node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
-to resolve `engines.node` in package.json files.
+```sh
+curl http://semver.io/node/stable
+# 0.10.22
 
-semver.io is open source and available on
-GitHub at [heroku/semver](https://github.com/heroku/semver).
+curl http://semver.io/node/unstable
+# 0.11.9
 
-semver.io is currently only implemented for Node.js, but is designed to
-support any software that follows the semver [rules](http://semver.org/).
+curl http://semver.io/node/resolve/0.8.x
+# 0.8.26
+```
 
-## Examples
+## In the browser
 
-Get the latest version of node that satisfies a given semver range:
-
-- [/node/resolve/0.10.x](http://semver.io/node/resolve/0.10.x)
-- [/node/resolve/0.11.x](http://semver.io/node/resolve/>=0.11.5)
-- [/node/resolve/~0.10.15](http://semver.io/node/resolve/~0.10.15)
-- [/node/resolve/>0.4](http://semver.io/node/resolve/>0.4)
-- [/node/resolve/>=0.8.5 <=0.8.14](http://semver.io/node/resolve/>=0.8.5 <=0.8.14)
-
-These routes are also provided for convenience:
-
-- [/node/stable](http://semver.io/node/stable)
-- [/node/unstable](http://semver.io/node/unstable)
-- [/node/versions](http://semver.io/node/versions)
-
-## JSON Endpoint
-
-There's also a CORS-friendly HTTP endpoint at
+There a CORS-friendly HTTP endpoint at
 [semver.io/node.json](http://semver.io/node.json) that gives you the whole kit
 and caboodle:
 
@@ -49,37 +35,32 @@ and caboodle:
 }
 ```
 
-## Caching
+## Ranges
 
-semver.io is designed to work even if nodejs.org is down. If the GET request to
-[nodejs.org/dist/](http://nodejs.org/dist/) takes too long to resolve, this repo's
-`cache/node.html` file will be loaded instead. To update the repo's cached file, run:
+semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs/node-semver) can parse. Here are some examples:
 
-```
-npm run updateCache
-```
+- [/node/resolve/0.10.x](http://semver.io/node/resolve/0.10.x)
+- [/node/resolve/0.11.x](http://semver.io/node/resolve/>=0.11.5)
+- [/node/resolve/~0.10.15](http://semver.io/node/resolve/~0.10.15)
+- [/node/resolve/>0.4](http://semver.io/node/resolve/>0.4)
+- [/node/resolve/>=0.8.5 <=0.8.14](http://semver.io/node/resolve/>=0.8.5 <=0.8.14)
 
-## Overriding the Default Stable Version
+These named routes are also provided for convenience:
 
-Occasionaly new versions of node are released on nodejs.org that the world just isn't ready for.
-This could be a predictiable change like a bump in minor version from `0.8.25` to `0.10.0`,
-or an [unexpectedly unstable release like `0.10.19`](https://github.com/joyent/node/issues/6263).
-To override the stable default version, use a config var:
+- [/node/stable](http://semver.io/node/stable)
+- [/node/unstable](http://semver.io/node/unstable)
+- [/node/versions](http://semver.io/node/versions)
 
-```
-heroku config:set STABLE_NODE_VERSION=0.10.18 -a semver
-```
+## How does it work?
 
-When the dust settles, remove the override:
+Under the hood, semver.io is powered by [node-version-resolver](https://npmjs.org/package/node-version-resolver), a node module that does all the work of talking to nodejs.org and parsing version data.
 
-```
-heroku config:unset STABLE_NODE_VERSION -a semver
-```
+While currently only implemented for node, semver.io is designed to support any software that follows the semver [rules](http://semver.org/).
 
 ## What about npm versions?
 
 npm versions are not tracked because the node binary has shipped with npm
-included since node` 0.6.3`. The [buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
+included since node `0.6.3`. The [buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
 ignores `engines.npm`, deferring to node for npm version resolution.
 
 ## Tests
@@ -105,3 +86,12 @@ GET /node/resolve/~0.10.15
 GET /node/resolve/0.11.5
   ✓ returns the exact version requested
 ```
+
+## Links
+
+- [semver.org](http://semver.org/)
+- [github.com/heroku/heroku-buildpack-nodejs](https://github.com/heroku/heroku-buildpack-nodejs#readme)
+- [github.com/heroku/semver](https://github.com/heroku/semver#readme)
+- [github.com/isaacs/node-semver](https://github.com/isaacs/node-semver#readme)
+- [npmjs.org/doc/misc/semver.html#Ranges](https://npmjs.org/doc/misc/semver.html#Ranges)
+- [npmjs.org/package/node-version-resolver](https://npmjs.org/package/node-version-resolver)
