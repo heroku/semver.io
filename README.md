@@ -62,30 +62,6 @@ npm versions are not tracked because the node binary has shipped with npm
 included since node `0.6.3`. The [buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
 ignores `engines.npm`, deferring to node for npm version resolution.
 
-## Tests
-
-```
-npm test
-
-GET /
-  ✓ renders the readme
-
-GET /node/stable
-  ✓ returns a stable node version
-
-GET /node/unstable
-  ✓ returns an unstable node version
-
-GET /node/resolve/0.8.x
-  ✓ returns a 0.8 node version
-
-GET /node/resolve/~0.10.15
-  ✓ returns a 0.10 node version
-
-GET /node/resolve/0.11.5
-  ✓ returns the exact version requested
-```
-
 ## Links
 
 - [what-is-the-latest-version-of-node.com](http://what-is-the-latest-version-of-node.com)
