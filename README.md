@@ -67,7 +67,7 @@ ignores `engines.npm`, deferring to node for npm version resolution.
 - [what-is-the-latest-version-of-node.com](http://what-is-the-latest-version-of-node.com)
 - [semver.org](http://semver.org)
 - [github.com/heroku/heroku-buildpack-nodejs](https://github.com/heroku/heroku-buildpack-nodejs#readme)
-- [github.com/heroku/semver](https://github.com/heroku/semver#readme)
+- [github.com/heroku/semver.io](https://github.com/heroku/semver.io#readme)
 - [github.com/isaacs/node-semver](https://github.com/isaacs/node-semver#readme)
 - [npmjs.org/doc/misc/semver.html#Ranges](https://npmjs.org/doc/misc/semver.html#Ranges)
 - [npmjs.org/package/node-version-resolver](https://npmjs.org/package/node-version-resolver)
