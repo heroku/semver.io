@@ -88,7 +88,8 @@ GET /node/resolve/0.11.5
 
 ## Links
 
-- [semver.org](http://semver.org/)
+- [what-is-the-latest-version-of-node.com](http://what-is-the-latest-version-of-node.com)
+- [semver.org](http://semver.org)
 - [github.com/heroku/heroku-buildpack-nodejs](https://github.com/heroku/heroku-buildpack-nodejs#readme)
 - [github.com/heroku/semver](https://github.com/heroku/semver#readme)
 - [github.com/isaacs/node-semver](https://github.com/isaacs/node-semver#readme)
