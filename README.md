@@ -22,15 +22,14 @@ There a CORS-friendly HTTP endpoint at
 [semver.io/node.json](http://semver.io/node.json) that gives you the whole kit
 and caboodle:
 
-```js
+```json
 {
-  stable: "0.10.22",
-  unstable: "0.11.8",
-  versions: [
-    "0.0.1",
-    "0.0.2",
-    "0.0.3",
-    "..."
+  "stable": "0.10.22",
+  "unstable": "0.11.8",
+  "versions": [
+    "0.8.6",
+    "...",
+    "0.11.9"
   ]
 }
 ```
