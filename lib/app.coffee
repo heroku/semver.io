@@ -26,6 +26,13 @@ app.get '/', (req, res, next) ->
     throw err if err
     res.send layout.replace("{{content}}", content)
 
+app.get '/ssl', (req, res, next) ->
+  res.type 'text'
+  res.send """
+    "Demonstration of domain control for DigiCert order #00462258"
+    "Please send the approval email to: ops@heroku.com"
+  """
+
 app.get '/node', (req, res, next) ->
   res.type 'text'
   res.send app.resolver.latest_stable
