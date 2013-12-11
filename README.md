@@ -6,20 +6,20 @@ semver.io is a plaintext and JSON webservice that tracks [all available versions
 ## On the command line
 
 ```sh
-curl http://semver.io/node/stable
+curl https://semver.io/node/stable
 # 0.10.22
 
-curl http://semver.io/node/unstable
+curl https://semver.io/node/unstable
 # 0.11.9
 
-curl http://semver.io/node/resolve/0.8.x
+curl https://semver.io/node/resolve/0.8.x
 # 0.8.26
 ```
 
 ## In the browser
 
 There a CORS-friendly HTTP endpoint at
-[semver.io/node.json](http://semver.io/node.json) that gives you the whole kit
+[semver.io/node.json](https://semver.io/node.json) that gives you the whole kit
 and caboodle:
 
 ```json
@@ -38,17 +38,17 @@ and caboodle:
 
 semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs/node-semver) can parse. Here are some examples:
 
-- [/node/resolve/0.10.x](http://semver.io/node/resolve/0.10.x)
-- [/node/resolve/0.11.x](http://semver.io/node/resolve/>=0.11.5)
-- [/node/resolve/~0.10.15](http://semver.io/node/resolve/~0.10.15)
-- [/node/resolve/>0.4](http://semver.io/node/resolve/>0.4)
-- [/node/resolve/>=0.8.5 <=0.8.14](http://semver.io/node/resolve/>=0.8.5 <=0.8.14)
+- [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
+- [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
+- [/node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
+- [/node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
+- [/node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
 
 These named routes are also provided for convenience:
 
-- [/node/stable](http://semver.io/node/stable)
-- [/node/unstable](http://semver.io/node/unstable)
-- [/node/versions](http://semver.io/node/versions)
+- [/node/stable](https://semver.io/node/stable)
+- [/node/unstable](https://semver.io/node/unstable)
+- [/node/versions](https://semver.io/node/versions)
 
 ## How does it work?
 
