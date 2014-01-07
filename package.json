@@ -12,7 +12,8 @@
     "marked": "~0.2.10",
     "node-version-resolver": "~0.2.2",
     "cors": "~2.1.0",
-    "pygmentize-bundled": "~2.1.0"
+    "pygmentize-bundled": "~2.1.0",
+    "semver": "~2.2.1"
   },
   "engines": {
     "node": "0.10.22"

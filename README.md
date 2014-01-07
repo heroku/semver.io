@@ -7,10 +7,10 @@ semver.io is a plaintext and JSON webservice that tracks [all available versions
 
 ```sh
 curl https://semver.io/node/stable
-# 0.10.22
+# {{current_stable_version}}
 
 curl https://semver.io/node/unstable
-# 0.11.9
+# {{current_unstable_version}}
 
 curl https://semver.io/node/resolve/0.8.x
 # 0.8.26
