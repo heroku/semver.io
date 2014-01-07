@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 assert = require "assert"
 semver = require "semver"
 supertest = require "supertest"

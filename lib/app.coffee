@@ -22,7 +22,10 @@ app.get '/', (req, res, next) ->
   readme = fs.readFileSync("./README.md").toString()
   # marked must be used in an async fashion here to enable
   # pygments code syntax highlighting.
+
   marked readme, (err, content) ->
+    content = content.replace("{{current_stable_version}}", app.resolver.latest_stable.toString())
+    content = content.replace("{{current_unstable_version}}", app.resolver.latest_unstable.toString())
     throw err if err
     res.send layout.replace("{{content}}", content)
 
