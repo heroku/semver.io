@@ -18,7 +18,7 @@ curl https://semver.io/node/resolve/0.8.x
 
 ## In the browser
 
-There a CORS-friendly HTTP endpoint at
+There's also a CORS-friendly HTTP endpoint at
 [semver.io/node.json](https://semver.io/node.json) that gives you the whole kit
 and caboodle:
 
