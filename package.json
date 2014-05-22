@@ -10,13 +10,17 @@
     "logfmt": "~0.15.0",
     "supertest": "~0.8.0",
     "marked": "~0.2.10",
-    "node-version-resolver": "~0.2.3",
+    "node-version-resolver": "^0.2.5",
     "cors": "~2.1.0",
     "pygmentize-bundled": "~2.1.0",
     "semver": "~2.2.1"
   },
   "engines": {
-    "node": "0.10.22"
+    "node": "0.10.28"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/semver.io"
   },
   "devDependencies": {
     "mocha": "~1.13.0"
