@@ -10,7 +10,7 @@
     "logfmt": "~0.15.0",
     "supertest": "~0.8.0",
     "marked": "~0.2.10",
-    "node-version-resolver": "^0.2.6",
+    "node-version-resolver": "^0.2.7",
     "cors": "~2.1.0",
     "pygmentize-bundled": "~2.1.0",
     "semver": "~2.2.1"
