@@ -2,19 +2,19 @@ process.env.NODE_ENV = 'test'
 
 assert = require "assert"
 semver = require "semver"
+fs = require "fs"
 Resolver = require "../lib/resolver"
 
 describe "Resolver", ->
 
   r = null # (scope)
 
-  beforeEach (done) ->
-    r = new Resolver ->
-      done()
+  beforeEach ->
+    r = new Resolver
+    r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
 
-  afterEach (done) ->
+  afterEach ->
     r = null
-    done()
 
   describe "initialization", ->
 
@@ -68,26 +68,31 @@ describe "Resolver", ->
     it "becomes latest_stable", (done) ->
       assert.notEqual r.latest_stable, '0.10.15'
       process.env.STABLE_NODE_VERSION = '0.10.15'
-      r = new Resolver ->
-        assert r.latest_stable, '0.10.15'
-        done()
+      r = new Resolver
+      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      assert r.latest_stable, '0.10.15'
+      done()
 
     it "satisfies stable-seeking ranges", (done) ->
       assert.notEqual r.satisfy(">0.8"), '0.10.3'
       process.env.STABLE_NODE_VERSION = '0.10.3'
-      r = new Resolver ->
-        assert.equal r.satisfy(">0.8"), '0.10.3'
-        done()
+      r = new Resolver
+      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      assert.equal r.satisfy(">0.8"), '0.10.3'
+      done()
 
     it "still resolves unstable ranges", (done) ->
       assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
       process.env.STABLE_NODE_VERSION = '0.8.20'
-      r = new Resolver ->
-        assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
-        done()
+      r = new Resolver
+      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
+      done()
 
     it "still resolves versions at a higher patchlevel than the override", (done) ->
       process.env.STABLE_NODE_VERSION = '0.10.18'
-      r = new Resolver ->
-        assert.equal r.satisfy('0.10.19'), '0.10.19'
-        done()
+      r = new Resolver
+      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      assert.equal r.satisfy('0.10.19'), '0.10.19'
+      done()
+      

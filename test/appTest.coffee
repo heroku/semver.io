@@ -1,12 +1,8 @@
 assert = require "assert"
 semver = require "semver"
 supertest = require "supertest"
-app = require "../lib/app"
-
-# app is not 'started' until its resolver is ready.
-before (done) ->
-  app.start ->
-    done()
+App = require "../lib/app"
+app = App()
 
 describe "App", ->
 
