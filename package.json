@@ -13,7 +13,10 @@
     "node-version-resolver": "^0.2.7",
     "cors": "~2.1.0",
     "pygmentize-bundled": "~2.1.0",
-    "semver": "~2.2.1"
+    "semver": "~2.2.1",
+    "superagent": "~0.15.4",
+    "lodash": "~2.3.0",
+    "array-sugar": "~0.2.4"
   },
   "engines": {
     "node": "0.10.28"
@@ -27,7 +30,8 @@
   },
   "scripts": {
     "start": "coffee index.coffee",
-    "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script"
+    "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script",
+    "updateCache": "mkdir -p cache && curl http://nodejs.org/dist/ > cache/node.html"
   },
   "keywords": [
     "semver",

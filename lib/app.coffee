@@ -3,7 +3,7 @@ marked = require './marked'
 logfmt  = require 'logfmt'
 fs  = require 'fs'
 cors = require 'cors'
-Resolver = require 'node-version-resolver'
+Resolver = require './resolver'
 
 module.exports = app = express()
 
