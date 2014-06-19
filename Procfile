@@ -1,1 +1,1 @@
-web: coffee index.coffee
+web: ./node_modules/.bin/coffee index.coffee
