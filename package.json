@@ -29,7 +29,7 @@
     "mocha": "~1.13.0"
   },
   "scripts": {
-    "start": "coffee index.coffee",
+    "start": "node index.js",
     "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script",
     "updateCache": "mkdir -p cache && curl http://nodejs.org/dist/ > cache/node.html"
   },
