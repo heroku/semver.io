@@ -1,5 +1,8 @@
 if (process.env.NODE_ENV === 'production') require('newrelic');
 
-var app = require('./lib/app');
+var App = require('./lib/app');
+var app = new App();
 
-app().listen(process.env.PORT || 5000);
+app.init(function onInit() {
+  app.listen(process.env.PORT || 5000);
+});

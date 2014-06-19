@@ -2,9 +2,12 @@ assert = require "assert"
 semver = require "semver"
 supertest = require "supertest"
 App = require "../lib/app"
-app = App()
+app = new App()
 
 describe "App", ->
+
+  before (done) ->
+    app.init(done)
 
   describe "GET /", ->
 
