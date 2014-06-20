@@ -5,13 +5,15 @@ semver = require "semver"
 fs = require "fs"
 Resolver = require "../lib/resolver"
 
+html = fs.readFileSync(__dirname + '/fixtures/node.html').toString();
+
 describe "Resolver", ->
 
   r = null # (scope)
 
   beforeEach ->
     r = new Resolver
-    r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+    r.parse(html)
 
   afterEach ->
     r = null
@@ -69,7 +71,7 @@ describe "Resolver", ->
       assert.notEqual r.latest_stable, '0.10.15'
       process.env.STABLE_NODE_VERSION = '0.10.15'
       r = new Resolver
-      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      r.parse(html)
       assert r.latest_stable, '0.10.15'
       done()
 
@@ -77,7 +79,7 @@ describe "Resolver", ->
       assert.notEqual r.satisfy(">0.8"), '0.10.3'
       process.env.STABLE_NODE_VERSION = '0.10.3'
       r = new Resolver
-      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      r.parse(html)
       assert.equal r.satisfy(">0.8"), '0.10.3'
       done()
 
@@ -85,14 +87,14 @@ describe "Resolver", ->
       assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
       process.env.STABLE_NODE_VERSION = '0.8.20'
       r = new Resolver
-      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      r.parse(html)
       assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
       done()
 
     it "still resolves versions at a higher patchlevel than the override", (done) ->
       process.env.STABLE_NODE_VERSION = '0.10.18'
       r = new Resolver
-      r.parse(fs.readFileSync(__dirname + '/../cache/node.html').toString())
+      r.parse(html)
       assert.equal r.satisfy('0.10.19'), '0.10.19'
       done()
       
