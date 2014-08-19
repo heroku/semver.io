@@ -4,6 +4,7 @@
   "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
+    "async": "^0.9.0",
     "body-parser": "^1.6.5",
     "coffee-script": "~1.7.1",
     "cors": "~2.4.1",
