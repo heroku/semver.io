@@ -1,16 +1,15 @@
-express = require 'express'
-marked = require './marked'
-logfmt  = require 'logfmt'
-fs  = require 'fs'
-cors = require 'cors'
 Resolver = require 'node-version-resolver'
+bodyParser = require 'body-parser'
+express    = require 'express'
+marked     = require './marked'
+logfmt     = require 'logfmt'
+cors       = require 'cors'
+fs         = require 'fs'
 
 module.exports = app = express()
 
-app.configure =>
-  app.use logfmt.requestLogger() unless process.env.NODE_ENV is "test"
-  app.use express.bodyParser()
-  app.use app.router
+app.use logfmt.requestLogger() unless process.env.NODE_ENV is "test"
+app.use bodyParser(extented: false)
 
 # app is not 'started' until its resolver is ready.
 app.start = (cb) =>

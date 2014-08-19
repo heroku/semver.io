@@ -4,16 +4,16 @@
   "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
-    "express": "~3.4.0",
-    "coffee-script": "~1.6.3",
-    "newrelic": "~1.0.0",
-    "logfmt": "~0.15.0",
-    "supertest": "~0.8.0",
-    "marked": "~0.2.10",
+    "body-parser": "^1.6.5",
+    "coffee-script": "~1.7.1",
+    "cors": "~2.4.1",
+    "express": "~4.8.5",
+    "logfmt": "~1.1.2",
+    "marked": "~0.3.2",
+    "newrelic": "~1.10.0",
     "node-version-resolver": "^0.2.7",
-    "cors": "~2.1.0",
     "pygmentize-bundled": "~2.1.0",
-    "semver": "~2.2.1"
+    "semver": "~3.0.1"
   },
   "engines": {
     "node": "0.10.28"
@@ -23,11 +23,12 @@
     "url": "https://github.com/heroku/semver.io"
   },
   "devDependencies": {
-    "mocha": "~1.13.0"
+    "mocha": "~1.21.4",
+    "supertest": "~0.13.0"
   },
   "scripts": {
     "start": "coffee index.coffee",
-    "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script"
+    "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script/register"
   },
   "keywords": [
     "semver",
