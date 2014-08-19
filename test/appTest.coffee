@@ -13,3 +13,4 @@ describe "GET /", ->
       .expect(200, done)
 
   require('./nodeResolverTest')(app)
+  require('./nginxResolverTest')(app)
