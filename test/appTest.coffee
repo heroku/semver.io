@@ -5,8 +5,7 @@ app = require "../lib/app"
 
 # app is not 'started' until its resolver is ready.
 before (done) ->
-  app.start ->
-    done()
+  app.start done
 
 describe "GET /", ->
 
