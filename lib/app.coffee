@@ -42,8 +42,12 @@ app.get '/', (req, res, next) ->
   # pygments code syntax highlighting.
 
   marked readme, (err, content) ->
-    content = content.replace "{{current_stable_version}}", app.nodeResolver.latest_stable.toString()
-    content = content.replace "{{current_unstable_version}}", app.nodeResolver.latest_unstable.toString()
+    content =
+      content
+        .replace "{{node:current_stable_version}}", app.nodeResolver.latest_stable.toString()
+        .replace "{{node:current_unstable_version}}", app.nodeResolver.latest_unstable.toString()
+        .replace "{{nginx:current_stable_version}}", app.nginxResolver.latest_stable.toString()
+        .replace "{{nginx:current_unstable_version}}", app.nginxResolver.latest_unstable.toString()
 
     throw err if err
 
