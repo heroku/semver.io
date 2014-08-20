@@ -2,11 +2,21 @@ express = require 'express'
 cors    = require 'cors'
 
 module.exports = (resolver) ->
-  router = new express.Router
+  router = new express.Router mergeParams: true
+
+  versions =
+    stable: resolver.latest_stable
+    unstable: resolver.latest_unstable
+    all: resolver.all
 
   router.get '/', (req, res, next) ->
-    res.type 'text'
-    res.send resolver.latest_stable
+    if req.params.format is '.json'
+      return res.json versions
+
+    res.format
+      text: -> res.send resolver.latest_stable
+      html: -> res.type('text').send resolver.latest_stable
+      json: -> res.json versions
 
   router.get '/resolve/:range', (req, res, next) ->
     res.type 'text'
@@ -27,10 +37,3 @@ module.exports = (resolver) ->
   router.get '/versions', (req, res, next) ->
     res.type 'text'
     res.send resolver.all.join("\n")
-
-  router.get '/index.json', cors(), (req, res, next) ->
-    res.json
-      stable: resolver.latest_stable
-      unstable: resolver.latest_unstable
-      versions: resolver.all
-

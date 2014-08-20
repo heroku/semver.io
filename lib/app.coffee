@@ -20,11 +20,11 @@ app.start = (cb) ->
   async.parallel({
     node: (done) ->
       nodeResolver = new NodeResolver ->
-        app.use '/node', routes(nodeResolver)
+        app.use '/node:format?', routes(nodeResolver)
         done(null, nodeResolver)
     nginx: (done) ->
       nginxResolver = new NginxResolver ->
-        app.use '/nginx', routes(nginxResolver)
+        app.use '/nginx:format?', routes(nginxResolver)
         done(null, nginxResolver)
   }, (err, results) ->
     return cb(err) if err

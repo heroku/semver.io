@@ -79,3 +79,19 @@ module.exports = (app) ->
           return done(err) if err
           assert.equal semver.parse(res.text).minor, 8
           done()
+
+  describe "GET /node.json", ->
+
+    it "returns a JSON with node versions info", (done) ->
+      supertest(app)
+        .get("/node.json")
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+        .end (err, res) ->
+          return done(err) if err
+
+          keys = (k for k of res.body)
+          assert 'stable' in keys
+          assert 'unstable' in keys
+          assert 'all' in keys
+          done()
