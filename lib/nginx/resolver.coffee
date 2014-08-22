@@ -16,7 +16,7 @@ class NginxVersionResolver
       versions = []
       body.replace /href\s*=\s*(["'])([^\1]+?)\1/gm, (match, delimiter, link) =>
         version = extractVersion link
-        versions.push(version) if semver.valid version
+        versions.push(version) if semver.valid(version) and version not in versions
 
       @all     = versions.sort (a, b) -> semver.compare(a, b)
       @stables = @all.filter (v) -> semver.parse(v).minor % 2 is 0
