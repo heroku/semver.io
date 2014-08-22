@@ -95,3 +95,20 @@ module.exports = (app) ->
           assert 'unstable' in keys
           assert 'all' in keys
           done()
+
+    it "does not include duplicated versions (fix #9)", (done) ->
+      supertest(app)
+        .get("/nginx.json")
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+        .end (err, res) ->
+          return done(err) if err
+
+          group = res.body.all.reduce(
+            (grouped, version) ->
+              grouped[version] = (grouped[version] || 0) + 1
+              grouped
+            {}
+          )
+          assert count is 1, "#{version} has duplicates" for version, count of group
+          done()
