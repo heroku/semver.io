@@ -9,7 +9,7 @@ module.exports = (resolver) ->
     unstable: resolver.latest_unstable
     all: resolver.all
 
-  router.get '/', (req, res, next) ->
+  router.get '/', cors(), (req, res, next) ->
     if req.params.format is '.json'
       return res.json versions
 
