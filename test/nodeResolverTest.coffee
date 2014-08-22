@@ -95,3 +95,11 @@ module.exports = (app) ->
           assert 'unstable' in keys
           assert 'all' in keys
           done()
+
+    it "adds CORS headers (fix #10)", (done) ->
+      supertest(app)
+        .get("/node.json")
+        .expect(200)
+        .expect('Access-Control-Allow-Origin', '*')
+        .end done
+
