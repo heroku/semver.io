@@ -8,6 +8,7 @@ fs         = require 'fs'
 
 NodeResolver  = require './node/resolver'
 NginxResolver = require './nginx/resolver'
+PhpResolver   = require './php/resolver'
 
 module.exports = app = express()
 
@@ -16,7 +17,7 @@ app.use bodyParser(extented: false)
 
 # app is not 'started' until its resolver is ready.
 app.start = (cb) ->
-  return cb() if app.nodeResolver and app.nginxResolver
+  return cb() if app.nodeResolver and app.nginxResolver and app.phpResolver
   async.parallel({
     node: (done) ->
       nodeResolver = new NodeResolver ->
@@ -26,11 +27,16 @@ app.start = (cb) ->
       nginxResolver = new NginxResolver ->
         app.use '/nginx:format?', routes(nginxResolver)
         done(null, nginxResolver)
+    php: (done) ->
+      phpResolver = new PhpResolver ->
+        app.use '/php:format?', routes(phpResolver)
+        done(null, phpResolver)
   }, (err, results) ->
     return cb(err) if err
 
     app.nodeResolver  = results.node
     app.nginxResolver = results.nginx
+    app.phpResolver = results.php
 
     do cb
   )
@@ -48,6 +54,7 @@ app.get '/', (req, res, next) ->
         .replace "{{node:current_unstable_version}}", app.nodeResolver.latest_unstable.toString()
         .replace "{{nginx:current_stable_version}}", app.nginxResolver.latest_stable.toString()
         .replace "{{nginx:current_unstable_version}}", app.nginxResolver.latest_unstable.toString()
+        .replace "{{php:current_stable_version}}", app.phpResolver.latest_stable.toString()
 
     throw err if err
 

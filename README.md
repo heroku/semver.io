@@ -1,7 +1,7 @@
 # semver.io
 
 semver.io is a plaintext and JSON webservice that tracks [all available versions
-of node.js](http://nodejs.org/dist) and [nginx](http://nginx.org/download/). It
+of node.js](http://nodejs.org/dist), [nginx](http://nginx.org/download/) and [php](http://php.net/releases/). It
 uses that version info to resolve
 [semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges). It's used
 by Heroku's [node
@@ -24,13 +24,16 @@ curl https://semver.io/node/resolve/0.8.x
 ### For nginx
 curl https://semver.io/nginx/stable
 # {{nginx:current_stable_version}}
+
+### For php
+curl https://semver.io/php/stable
+# {{php:current_stable_version}}
 ```
 
 ## In the browser
 
 There's also a CORS-friendly HTTP endpoint at
-[semver.io/node.json](https://semver.io/node.json) and
-[semver.io/nginx.json](https://semver.io/nginx.json) that gives you the whole
+[semver.io/node.json](https://semver.io/node.json), [semver.io/nginx.json](https://semver.io/nginx.json), and [semver.io/php.json](https://semver.io/php.json) that gives you the whole
 kit and caboodle:
 
 ```js
@@ -54,7 +57,7 @@ The response is something like:
 
 ## Ranges
 
-semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs/node-semver) can parse. Here are some examples (these also work for nginx):
+semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs/node-semver) can parse. Here are some examples (these also work for nginx and php):
 
 - [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
 - [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
@@ -75,7 +78,10 @@ Under the hood, semver.io is powered by [node-version-resolver](https://npmjs.or
 For nginx, it parses nginx's tarball filenames from [nginx.org/download](http://nginx.org/download)
 and extract the versions available.
 
-While currently implemented for node and nginx, semver.io is designed to support any software that follows the semver [rules](http://semver.org/).
+For php, it unserializes releases from [php.net/releases/](http://php.net/releases/)
+and extract the versions available.
+
+While currently implemented for node, nginx, and php, semver.io is designed to support any software that follows the semver [rules](http://semver.org/).
 
 ## What about npm versions?
 
