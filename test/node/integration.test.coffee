@@ -1,38 +1,45 @@
 assert = require "assert"
 semver = require "semver"
 supertest = require "supertest"
-App = require "../lib/app"
-app = new App()
-failingApp = new App()
 
-describe "App", ->
+App = require "../../lib/app"
+Resolver = require "../../lib/resolver"
+NodeSource = require "../../lib/sources/node"
 
-  before (done) ->
-    app.update(done)
+app = new App({
+  node: new Resolver(new NodeSource()),
+});
 
-  before (done) ->
-    failingApp.update ->
-      failingApp.timeout = 1
-      done()
+failingApp = new App({
+  node: new Resolver(new NodeSource())
+});
 
-  describe "#update()", ->
+describe "Node Routes", ->
 
-    it "works with a normal timeout", (done) ->
-      app.update (err, updated) ->
-        assert.ok(updated)
+  describe "Initialization", ->
+
+    it "updates the app", (done) ->
+      this.timeout(20000)
+      app.resolvers.node.update (err, updated) ->
+        assert(!err)
+        assert(updated)
         done()
 
-    it "fails with a short timeout", (done) ->
-      failingApp.update (err, updated) ->
-        assert.ok(!updated)
+    it "prime's the failing app's cache", (done) ->
+      this.timeout(20000)
+      failingApp.resolvers.node.update (err, updated) ->
+        assert(!err)
+        assert(updated)
         done()
 
-  describe "GET /", ->
+    it "redirects the failing app to a false endpoint", (done) ->
+      this.timeout(20000)
+      failingApp.resolvers.node.source.url = 'http://nodejs.org/fail/';
+      failingApp.resolvers.node.update (err, updated) ->
+        assert(err)
+        assert(!updated)
+        done()
 
-    it "renders the readme", (done) ->
-      supertest(app)
-        .get("/")
-        .expect(200, done)
 
   describe "GET /node/stable", ->
 
@@ -44,18 +51,18 @@ describe "App", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor%2, 0
+          assert.equal(semver.parse(res.text).minor % 2, 0)
           done()
 
     it "works with a failing endpoint", (done) ->
-      supertest(app)
+      supertest(failingApp)
         .get("/node/stable")
         .expect(200)
         .expect('content-type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor%2, 0
+          assert.equal(semver.parse(res.text).minor % 2, 0)
           done()
 
   describe "GET /node/unstable", ->
@@ -68,7 +75,7 @@ describe "App", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor%2, 1
+          assert.equal(semver.parse(res.text).minor % 2, 1)
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -79,7 +86,7 @@ describe "App", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor%2, 1
+          assert.equal(semver.parse(res.text).minor % 2, 1)
           done()
 
   describe "GET /node/resolve/0.8.x", ->
@@ -115,9 +122,9 @@ describe "App", ->
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor, 10
-          assert (semver.parse(res.text).patch > 20)
+          assert(semver.valid(res.text), 'semver is valid')
+          assert.equal(semver.parse(res.text).minor, 10, 'minor equals 10')
+          assert(semver.parse(res.text).patch > 20, 'patch is greater than 20')
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -165,7 +172,7 @@ describe "App", ->
           return done(err) if err
           assert.equal semver.parse(res.text).minor, 8
           done()
-    
+
     it "works with a failing endpoint", (done) ->
       supertest(app)
         .get("/node/resolve?range=0.8.x")
@@ -187,11 +194,11 @@ describe "App", ->
           return done(err) if err
           assert.equal typeof(res.body.stable), "string"
           assert.equal typeof(res.body.unstable), "string"
-          assert.equal typeof(res.body.versions), "object"
+          assert.equal typeof(res.body.all), "object"
           assert.equal typeof(res.body.updated), "string"
-          assert.ok res.body.versions.length
+          assert.ok res.body.all.length
           done()
-    
+
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
         .get("/node.json")
@@ -201,18 +208,7 @@ describe "App", ->
           return done(err) if err
           assert.equal typeof(res.body.stable), "string"
           assert.equal typeof(res.body.unstable), "string"
-          assert.equal typeof(res.body.versions), "object"
+          assert.equal typeof(res.body.all), "object"
           assert.equal typeof(res.body.updated), "string"
-          assert.ok res.body.versions.length
+          assert.ok res.body.all.length
           done()
-
-  describe "Auto-updating", ->
-
-    it "should start as soon as update is called", (done) ->
-      quickApp = new App()
-      quickApp.interval = 50
-      checkUpdates = () ->
-        assert.ok quickApp.updates >= 3 and quickApp.updates <= 5
-        done()
-      quickApp.update()
-      setTimeout(checkUpdates, 200)

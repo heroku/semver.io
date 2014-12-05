@@ -1,30 +1,55 @@
 # semver.io
 
-semver.io is a plaintext and JSON webservice that tracks [all available versions
-of node.js](http://nodejs.org/dist) and uses that version info to resolve
-[semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges). It's used
-by Heroku's [node
-buildpack](https://github.com/heroku/heroku-buildpack-nodejs/blob/5754e60de7b8472d5070c9b713a898d353845c68/bin/compile#L18-22)
+semver.io is a plaintext and JSON webservice
+that tracks all available versions of
+[node.js](/node/versions),
+[npm](/npm/versions),
+and [nginx](/nginx/versions).
+It uses that version info to resolve
+[semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges).
+It's used by Heroku's
+[node buildpack](https://github.com/heroku/heroku-buildpack-nodejs/blob/5754e60de7b8472d5070c9b713a898d353845c68/bin/compile#L18-22)
 and is open-sourced [on GitHub](https://github.com/heroku/semver.io).
 
-## On the command line
+## Other sources
+
+Semver.io uses a simple and short module system to pull version data from a variety of sources.
+Pull requests are welcome!
+You can start with one of the current implementations as a template:
+
+- [node module](https://github.com/heroku/semver.io/blob/master/lib/sources/node.js)
+- [npm module](https://github.com/heroku/semver.io/blob/master/lib/sources/npm.js)
+- [nginx module](https://github.com/heroku/semver.io/blob/master/lib/sources/nginx.js)
+
+## Usage
+
+### Command-line
 
 ```sh
 curl https://semver.io/node/stable
-# {{current_stable_version}}
+# {{node:current_stable_version}}
 
 curl https://semver.io/node/unstable
-# {{current_unstable_version}}
+# {{node:current_unstable_version}}
 
 curl https://semver.io/node/resolve/0.8.x
 # 0.8.26
+
+curl https://semver.io/nginx/stable
+# {{nginx:current_stable_version}}
+
 ```
 
-## In the browser
+### In the browser
 
-There's also a CORS-friendly HTTP endpoint at
-[semver.io/node.json](https://semver.io/node.json) that gives you the whole kit
-and caboodle:
+There are CORS-friendly HTTP endpoints for each source
+with the whole kit and caboodle:
+
+- [semver.io/node.json](https://semver.io/node.json)
+- [semver.io/npm.json](https://semver.io/npm.json)
+- [semver.io/nginx.json](https://semver.io/nginx.json)
+
+The response is something like:
 
 ```json
 {
@@ -40,7 +65,8 @@ and caboodle:
 
 ## Ranges
 
-semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs/node-semver) can parse. Here are some examples:
+semver.io supports any range that [node-semver](https://github.com/isaacs/node-semver) can parse.
+For example:
 
 - [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
 - [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
@@ -51,20 +77,8 @@ semver.io supports any range that [isaacs/node-semver](https://github.com/isaacs
 These named routes are also provided for convenience:
 
 - [/node/stable](https://semver.io/node/stable)
-- [/node/unstable](https://semver.io/node/unstable)
 - [/node/versions](https://semver.io/node/versions)
-
-## How does it work?
-
-Under the hood, semver.io is powered by [node-version-resolver](https://npmjs.org/package/node-version-resolver), a node module that does all the work of talking to nodejs.org and parsing version data.
-
-While currently only implemented for node, semver.io is designed to support any software that follows the semver [rules](http://semver.org/).
-
-## What about npm versions?
-
-npm versions are not tracked because the node binary has shipped with npm
-included since node `0.6.3`. The [buildpack](https://github.com/heroku/heroku-buildpack-nodejs)
-ignores `engines.npm`, deferring to node for npm version resolution.
+- [/nginx/unstable](https://semver.io/nginx/unstable)
 
 ## Links
 
