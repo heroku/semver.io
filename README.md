@@ -74,11 +74,11 @@ For example:
 - [/node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
 - [/node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
 
-These named routes are also provided for convenience:
+These named routes are also provided for convenience (for each source):
 
 - [/node/stable](https://semver.io/node/stable)
+- [/node/unstable](https://semver.io/node/unstable)
 - [/node/versions](https://semver.io/node/versions)
-- [/nginx/unstable](https://semver.io/nginx/unstable)
 
 ## Links
 
