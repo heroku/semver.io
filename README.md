@@ -55,7 +55,7 @@ The response is something like:
 {
   "stable": "0.10.22",
   "unstable": "0.11.8",
-  "versions": [
+  "all": [
     "0.8.6",
     "...",
     "0.11.9"
