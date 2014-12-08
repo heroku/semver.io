@@ -1,36 +1,37 @@
 {
   "name": "semver.io",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
-    "async": "^0.9.0",
-    "body-parser": "^1.6.5",
-    "coffee-script": "~1.7.1",
-    "cors": "~2.4.1",
-    "express": "~4.8.5",
-    "logfmt": "~1.1.2",
-    "marked": "~0.3.2",
-    "newrelic": "~1.10.0",
-    "node-version-resolver": "^0.2.7",
-    "pygmentize-bundled": "~2.1.0",
-    "request": "^2.40.0",
-    "semver": "^3.0.1"
+    "array-sugar": "^1.0.0",
+    "body-parser": "^1.9.2",
+    "coffee-script": "^1.8.0",
+    "cors": "^2.5.2",
+    "express": "^4.10.1",
+    "lodash": "^2.4.1",
+    "logfmt": "^1.2.0",
+    "marked": "^0.3.2",
+    "newrelic": "^1.14.1",
+    "npm-stats": "^1.1.0",
+    "pygmentize-bundled": "^2.3.0",
+    "semver": "^4.1.0",
+    "superagent": "^0.21.0"
   },
   "engines": {
-    "node": "0.10.28"
+    "node": "0.11.x"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/heroku/semver.io"
   },
   "devDependencies": {
-    "mocha": "~1.21.4",
-    "supertest": "~0.13.0"
+    "mocha": "^2.0.1",
+    "supertest": "^0.15.0"
   },
   "scripts": {
-    "start": "coffee index.coffee",
-    "test": "export NODE_ENV=test && mocha --compilers coffee:coffee-script/register"
+    "start": "node index.js",
+    "test": "NODE_ENV=test mocha -b --compilers coffee:coffee-script/register --reporter spec --ui tdd $(find test -name '*.test.coffee')"
   },
   "keywords": [
     "semver",
