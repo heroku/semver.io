@@ -26,18 +26,17 @@ You can start with one of the current implementations as a template:
 ### Command-line
 
 ```sh
-### For nodejs
 curl https://semver.io/node/stable
-# {{node:current_stable_version}}
+0.10.33
 
 curl https://semver.io/node/unstable
-# {{node:current_unstable_version}}
+0.11.14
 
 curl https://semver.io/node/resolve/0.8.x
-# 0.8.26
+0.8.28
 
 curl https://semver.io/nginx/stable
-# {{nginx:current_stable_version}}
+1.6.2
 
 ```
 
