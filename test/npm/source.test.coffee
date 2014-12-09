@@ -36,8 +36,8 @@ describe "Node Source", ->
 
     it "has an array of stable versions", ->
       assert.equal typeof(this.s.stable), "object"
-      assert.equal this.s.stable.length, 99
-      assert.equal this.s.stable[98], '2.1.12'
+      assert.equal this.s.stable.length, 98
+      assert.equal this.s.stable[97], '2.1.11'
 
     it "has been updated", ->
       assert.ok this.s.updated
