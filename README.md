@@ -3,7 +3,7 @@
 semver.io is a plaintext and JSON webservice
 that tracks all available versions of
 [node.js](/node/versions),
-[iojs](/iojs/versions),s
+[iojs](/iojs/versions),
 [npm](/npm/versions),
 and [nginx](/nginx/versions).
 It uses that version info to resolve
