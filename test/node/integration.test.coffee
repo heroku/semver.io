@@ -75,7 +75,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 1)
+          assert.equal(semver.parse(res.text).minor, 12)
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -86,7 +86,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 1)
+          assert.equal(semver.parse(res.text).minor, 12)
           done()
 
   describe "GET /node/resolve/0.8.x", ->
