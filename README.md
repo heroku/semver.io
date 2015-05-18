@@ -5,7 +5,8 @@ that tracks all available versions of
 [node.js](/node/versions),
 [iojs](/iojs/versions),
 [npm](/npm/versions),
-and [nginx](/nginx/versions).
+[nginx](/nginx/versions),
+and [mongodb](/mongodb/versions).
 It uses that version info to resolve
 [semver range queries](https://npmjs.org/doc/misc/semver.html#Ranges).
 It's used by Heroku's
@@ -22,6 +23,7 @@ You can start with one of the current implementations as a template:
 - [iojs module](https://github.com/heroku/semver.io/blob/master/lib/sources/iojs.js)
 - [npm module](https://github.com/heroku/semver.io/blob/master/lib/sources/npm.js)
 - [nginx module](https://github.com/heroku/semver.io/blob/master/lib/sources/nginx.js)
+- [mongodb module](https://github.com/heroku/semver.io/blob/master/lib/sources/mongodb.js)
 
 ## Usage
 
@@ -51,6 +53,7 @@ with the whole kit and caboodle:
 - [semver.io/iojs.json](https://semver.io/iojs.json)
 - [semver.io/npm.json](https://semver.io/npm.json)
 - [semver.io/nginx.json](https://semver.io/nginx.json)
+- [semver.io/mongodb.json](https://semver.io/mongodb.json)
 
 The response is something like:
 
@@ -82,6 +85,7 @@ These named routes are also provided for convenience (for each source):
 - [/node/stable](https://semver.io/node/stable)
 - [/nginx/unstable](https://semver.io/nginx/unstable)
 - [/node/versions](https://semver.io/node/versions)
+- [/mongodb/stable](https://semver.io/mongodb/stable)
 
 ## Links
 
