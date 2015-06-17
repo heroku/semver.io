@@ -51,7 +51,7 @@ describe "IoJs Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 0)
+          assert semver.satisfies(res.text, '>=0.0.0')
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -62,7 +62,7 @@ describe "IoJs Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 0)
+          assert semver.satisfies(res.text, '>=0.0.0')
           done()
 
   describe "GET /iojs/unstable", ->
