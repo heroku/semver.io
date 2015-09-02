@@ -34,13 +34,16 @@ describe "Node Source", ->
 
     it "has an array of all versions", ->
       assert.equal typeof(this.s.all), "object"
-      assert.equal this.s.all.length, 215
-      assert.equal this.s.all[214], '0.11.13'
+      assert.equal this.s.all.length, 219
+      assert.equal this.s.all[214], '0.11.12'
 
     it "has an array of stable versions", ->
       assert.equal typeof(this.s.stable), "object"
-      assert.equal this.s.stable.length, 106
+      assert.equal this.s.stable.length, 108
       assert.equal this.s.stable[105], '0.10.29'
+
+    it "includes v4.0.0 in stable", ->
+      assert.ok(this.s.stable.indexOf('4.0.0') != -1)
 
     it "has been updated", ->
       assert.ok this.s.updated

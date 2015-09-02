@@ -18,17 +18,17 @@ describe "Resolver", ->
       assert.equal this.r.satisfy("0.8.15"), "0.8.15"
 
     it "matches common patterns to stable version", ->
-      assert.equal this.r.satisfy("0.10.x"), this.r.getLatestStable()
-      assert.equal this.r.satisfy("~0.10.0"), this.r.getLatestStable()
+      assert.equal this.r.satisfy("4.1.x"), this.r.getLatestStable()
+      assert.equal this.r.satisfy("~4.1.0"), this.r.getLatestStable()
       assert.equal this.r.satisfy(">0.4"), this.r.getLatestStable()
       assert.equal this.r.satisfy(">=0.6.9"), this.r.getLatestStable()
       assert.equal this.r.satisfy("*"), this.r.getLatestStable()
 
     it "uses latest unstable version when request version is beyond stable version", ->
-      assert.equal this.r.satisfy("0.11.x"), this.r.getLatest()
-      assert.equal this.r.satisfy("~0.11.0"), this.r.getLatest()
-      assert.equal this.r.satisfy(">0.11.0"), this.r.getLatest()
-      assert.equal this.r.satisfy(">=0.10.100"), this.r.getLatest()
+      assert.equal this.r.satisfy("^4.2.0-alpha"), this.r.getLatest()
+      assert.equal this.r.satisfy("~4.2.0-alpha"), this.r.getLatest()
+      assert.equal this.r.satisfy(">4.2.0-alpha"), this.r.getLatest()
+      assert.equal this.r.satisfy(">=4.2.0-alpha"), this.r.getLatest()
 
     it "defaults to latest stable version when given crazy input", ->
       assert.equal this.r.satisfy(null), this.r.getLatestStable()

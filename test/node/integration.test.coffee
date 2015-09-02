@@ -51,7 +51,8 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 0)
+          assert.equal(semver.satisfies(res.text, '>=1.0.0') ||
+              (semver.satisfies(res.text, '<1.0.0') && semver(res.text).minor % 2), 0)
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -62,7 +63,8 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor % 2, 0)
+          assert.equal(semver.satisfies(res.text, '>=1.0.0') ||
+              (semver.satisfies(res.text, '<1.0.0') && semver(res.text).minor % 2), 0)
           done()
 
   describe "GET /node/unstable", ->
