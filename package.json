@@ -15,7 +15,7 @@
     "newrelic": "^1.14.1",
     "npm-stats": "^1.1.0",
     "pygmentize-bundled": "^2.3.0",
-    "semver": "^4.1.0",
+    "semver": "^5.0.1",
     "superagent": "^0.21.0"
   },
   "engines": {
