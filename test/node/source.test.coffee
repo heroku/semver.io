@@ -42,5 +42,8 @@ describe "Node Source", ->
       assert.equal this.s.stable.length, 108
       assert.equal this.s.stable[105], '0.10.29'
 
+    it "includes v4.0.0 in stable", ->
+      assert.ok(this.s.stable.indexOf('4.0.0') != -1)
+
     it "has been updated", ->
       assert.ok this.s.updated
