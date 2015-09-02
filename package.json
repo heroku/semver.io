@@ -1,6 +1,6 @@
 {
   "name": "semver.io",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a plaintext webservice that resolves semver ranges",
   "main": "index.js",
   "dependencies": {
