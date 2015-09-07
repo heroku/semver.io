@@ -34,7 +34,15 @@ describe "Node Routes", ->
 
     it "redirects the failing app to a false endpoint", (done) ->
       this.timeout(20000)
-      failingApp.resolvers.node.source.url = 'http://nodejs.org/fail/';
+      failingApp.resolvers.node.source.releaseUrl = 'http://nodejs.org/fail/';
+      failingApp.resolvers.node.update (err, updated) ->
+        assert(err)
+        assert(!updated)
+        done()
+
+    it "redirects the failing app to a false endpoint", (done) ->
+      this.timeout(20000)
+      failingApp.resolvers.node.source.candidateUrl = 'http://nodejs.org/fail/';
       failingApp.resolvers.node.update (err, updated) ->
         assert(err)
         assert(!updated)
@@ -77,7 +85,6 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor, 12)
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -88,7 +95,6 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(semver.parse(res.text).minor, 12)
           done()
 
   describe "GET /node/resolve/0.8.x", ->
