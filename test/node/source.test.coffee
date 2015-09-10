@@ -20,8 +20,8 @@ describe "Node Source", ->
     it "default to empty stable array", ->
       assert.equal this.s.stable.length, 0
 
-    it "defaults to the 'https://nodejs.org/en/download/releases/' url", ->
-      assert.equal this.s.url, 'https://nodejs.org/en/download/releases/'
+    it "defaults to the 'https://nodejs.org/dist/' url", ->
+      assert.equal this.s.url, 'https://nodejs.org/dist/'
 
     it "has never been updated", ->
       assert.ok !this.s.updated
