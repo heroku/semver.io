@@ -20,8 +20,8 @@ describe "IoJs Source", ->
     it "default to empty stable array", ->
       assert.equal this.s.stable.length, 0
 
-    it "defaults to the 'http://iojs.org/dist/' url", ->
-      assert.equal this.s.url, 'http://iojs.org/dist/'
+    it "defaults to the 'https://nodejs.org/download/release/' url", ->
+      assert.equal this.s.url, 'https://nodejs.org/download/release/'
 
     it "has never been updated", ->
       assert.ok !this.s.updated
