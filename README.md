@@ -89,7 +89,6 @@ These named routes are also provided for convenience (for each source):
 
 ## Links
 
-- [what-is-the-latest-version-of-node.com](http://what-is-the-latest-version-of-node.com)
 - [semver.org](http://semver.org)
 - [github.com/heroku/heroku-buildpack-nodejs](https://github.com/heroku/heroku-buildpack-nodejs#readme)
 - [github.com/heroku/semver.io](https://github.com/heroku/semver.io#readme)
