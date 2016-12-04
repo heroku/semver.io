@@ -5,6 +5,7 @@ that tracks all available versions of
 [node.js](/node/versions),
 [iojs](/iojs/versions),
 [npm](/npm/versions),
+[yarn](/yarn/versions),
 [nginx](/nginx/versions),
 and [mongodb](/mongodb/versions).
 It uses that version info to resolve
@@ -22,6 +23,7 @@ You can start with one of the current implementations as a template:
 - [node module](https://github.com/heroku/semver.io/blob/master/lib/sources/node.js)
 - [iojs module](https://github.com/heroku/semver.io/blob/master/lib/sources/iojs.js)
 - [npm module](https://github.com/heroku/semver.io/blob/master/lib/sources/npm.js)
+- [yarn module](https://github.com/heroku/semver.io/blob/master/lib/sources/yarn.js)
 - [nginx module](https://github.com/heroku/semver.io/blob/master/lib/sources/nginx.js)
 - [mongodb module](https://github.com/heroku/semver.io/blob/master/lib/sources/mongodb.js)
 
@@ -52,6 +54,7 @@ with the whole kit and caboodle:
 - [semver.io/node.json](https://semver.io/node.json)
 - [semver.io/iojs.json](https://semver.io/iojs.json)
 - [semver.io/npm.json](https://semver.io/npm.json)
+- [semver.io/yarn.json](https://semver.io/yarn.json)
 - [semver.io/nginx.json](https://semver.io/nginx.json)
 - [semver.io/mongodb.json](https://semver.io/mongodb.json)
 
