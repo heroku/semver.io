@@ -78,7 +78,7 @@ semver.io supports any range that [node-semver](https://github.com/isaacs/node-s
 For example:
 
 - [/node/resolve/0.10.x](https://semver.io/node/resolve/0.10.x)
-- [/node/resolve/0.11.x](https://semver.io/node/resolve/>=0.11.5)
+- [/node/resolve/>=0.11.5](https://semver.io/node/resolve/>=0.11.5)
 - [/node/resolve/~0.10.15](https://semver.io/node/resolve/~0.10.15)
 - [/node/resolve/>0.4](https://semver.io/node/resolve/>0.4)
 - [/node/resolve/>=0.8.5 <=0.8.14](https://semver.io/node/resolve/>=0.8.5 <=0.8.14)
