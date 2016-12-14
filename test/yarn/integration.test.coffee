@@ -4,211 +4,183 @@ supertest = require "supertest"
 
 App = require "../../lib/app"
 Resolver = require "../../lib/resolver"
-NodeSource = require "../../lib/sources/node"
+YarnSource = require "../../lib/sources/yarn"
 
 app = new App({
-  node: new Resolver(new NodeSource()),
+  yarn: new Resolver(new YarnSource()),
 });
 
 failingApp = new App({
-  node: new Resolver(new NodeSource())
+  yarn: new Resolver(new YarnSource())
 });
 
-describe "Node Routes", ->
+describe "Yarn Routes", ->
 
   describe "Initialization", ->
 
     it "updates the app", (done) ->
       this.timeout(20000)
-      app.resolvers.node.update (err, updated) ->
+      app.resolvers.yarn.update (err, updated) ->
         assert(!err)
         assert(updated)
         done()
 
     it "prime's the failing app's cache", (done) ->
       this.timeout(20000)
-      failingApp.resolvers.node.update (err, updated) ->
+      failingApp.resolvers.yarn.update (err, updated) ->
         assert(!err)
         assert(updated)
         done()
 
     it "redirects the failing app to a false endpoint", (done) ->
       this.timeout(20000)
-      failingApp.resolvers.node.source.url = 'http://nodejs.org/fail/';
-      failingApp.resolvers.node.update (err, updated) ->
+      failingApp.resolvers.yarn.source.registry = 'https://fail.npmjs.com/';
+      failingApp.resolvers.yarn.update (err, updated) ->
         assert(err)
         assert(!updated)
         done()
 
 
-  describe "GET /node/stable", ->
+  describe "GET /yarn/stable", ->
 
-    it "returns a stable node version", (done) ->
+    it "returns a stable yarn version", (done) ->
       supertest(app)
-        .get("/node/stable")
+        .get("/yarn/stable")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
-        .get("/node/stable")
+        .get("/yarn/stable")
         .expect(200)
         .expect('content-type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
           done()
 
-  describe "GET /node/unstable", ->
+  describe "GET /yarn/unstable", ->
 
-    it "returns an unstable node version", (done) ->
+    it "returns an unstable yarn version", (done) ->
       supertest(app)
-        .get("/node/unstable")
+        .get("/yarn/unstable")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
-        .get("/node/unstable")
+        .get("/yarn/unstable")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
           done()
 
-  describe "GET /node/resolve/0.8.x", ->
+  describe "GET /yarn/resolve/0.17.x", ->
 
-    it "returns a 0.8 node version", (done) ->
+    it "returns a 0.17 yarn version", (done) ->
       supertest(app)
-        .get("/node/resolve/0.8.x")
+        .get("/yarn/resolve/0.17.x")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor, 8
+          assert.equal semver(res.text).major, 0
+          assert.equal semver(res.text).minor, 17
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
-        .get("/node/resolve/0.8.x")
+        .get("/yarn/resolve/0.17.x")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor, 8
+          assert.equal semver(res.text).major, 0
+          assert.equal semver(res.text).minor, 17
           done()
 
-  describe "GET /node/resolve/~0.10.15", ->
+  describe "GET /yarn/resolve/~0.16.1", ->
 
-    it "returns a 0.10 node version", (done) ->
+    it "returns a 0.16 yarn version", (done) ->
       supertest(app)
-        .get("/node/resolve/0.10.x")
+        .get("/yarn/resolve/~0.16.1")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert(semver.valid(res.text), 'semver is valid')
-          assert.equal(semver.parse(res.text).minor, 10, 'minor equals 10')
-          assert(semver.parse(res.text).patch > 20, 'patch is greater than 20')
+          assert semver.valid(res.text)
+          assert.equal semver(res.text).major, 0
+          assert.equal semver(res.text).minor, 16
+          assert semver(res.text).patch > 0
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
-        .get("/node/resolve/0.10.x")
+        .get("/yarn/resolve/~0.16.1")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal semver.parse(res.text).minor, 10
-          assert (semver.parse(res.text).patch > 20)
+          assert.equal semver(res.text).major, 0
+          assert.equal semver(res.text).minor, 16
+          assert semver(res.text).patch > 0
           done()
 
-  describe "GET /node/resolve/0.11.5", ->
+  describe "GET /yarn/resolve/0.17.10", ->
 
     it "returns the exact version requested", (done) ->
       supertest(app)
-        .get("/node/resolve/0.11.5")
+        .get("/yarn/resolve/0.17.10")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert.equal res.text, "0.11.5"
+          assert.equal res.text, "0.17.10"
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(failingApp)
-        .get("/node/resolve/0.11.5")
+        .get("/yarn/resolve/0.17.10")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert.equal res.text, "0.11.5"
+          assert.equal res.text, "0.17.10"
           done()
 
-  describe "GET /node/resolve?range=0.8.x", ->
+  describe "GET /yarn/resolve?range=0.16.x", ->
 
     it "allows range as a query param", (done) ->
       supertest(app)
-        .get("/node/resolve?range=0.8.x")
+        .get("/yarn/resolve?range=0.16.x")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert.equal semver.parse(res.text).minor, 8
+          assert.equal semver.parse(res.text).major, 0
+          assert.equal semver.parse(res.text).minor, 16
           done()
 
     it "works with a failing endpoint", (done) ->
       supertest(app)
-        .get("/node/resolve?range=0.8.x")
+        .get("/yarn/resolve?range=0.16.x")
         .expect(200)
         .expect('Content-Type', /text\/plain/)
         .end (err, res) ->
           return done(err) if err
-          assert.equal semver.parse(res.text).minor, 8
-          done()
-
-  describe "GET /node.json", ->
-
-    it "returns JSON with stable, unstable, versions, updated", (done) ->
-      supertest(app)
-        .get("/node.json")
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-        .end (err, res) ->
-          return done(err) if err
-          assert.equal typeof(res.body.stable), "string"
-          assert.equal typeof(res.body.unstable), "string"
-          assert.equal typeof(res.body.all), "object"
-          assert.equal typeof(res.body.updated), "string"
-          assert.ok res.body.all.length
-          done()
-
-    it "works with a failing endpoint", (done) ->
-      supertest(failingApp)
-        .get("/node.json")
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-        .end (err, res) ->
-          return done(err) if err
-          assert.equal typeof(res.body.stable), "string"
-          assert.equal typeof(res.body.unstable), "string"
-          assert.equal typeof(res.body.all), "object"
-          assert.equal typeof(res.body.updated), "string"
-          assert.ok res.body.all.length
+          assert.equal semver.parse(res.text).major, 0
+          assert.equal semver.parse(res.text).minor, 16
           done()
