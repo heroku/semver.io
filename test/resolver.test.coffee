@@ -36,28 +36,6 @@ describe "Resolver", ->
       assert.equal this.r.satisfy(""), this.r.getLatestStable()
       assert.equal this.r.satisfy("boogers"), this.r.getLatestStable()
 
-    describe "with environment override", ->
-
-      it "obeys maximum stable limit", ->
-        r = new Resolver(new Source(), null, '0.10.15')
-        assert.equal r.getLatestStable(), '0.10.15'
-
-      it "obeys minimum stable limit", ->
-        r = new Resolver(new Source(), '0.2.6')
-        assert.equal r.getStableVersions()[0], '0.2.6'
-
-      it "satisfies stable-seeking ranges", ->
-        r = new Resolver(new Source(), null, '0.10.3')
-        assert.equal r.satisfy('>0.8'), '0.10.3'
-
-      it "still resolves unstable ranges", ->
-        r = new Resolver(new Source(), null, '0.8.20')
-        assert.equal semver.parse(r.satisfy('0.11.x')).minor, 11
-
-      it "still resolves versions at a higher patchlevel than the override", ->
-        r = new Resolver(new Source(), null, '0.10.18')
-        assert.equal r.satisfy('0.10.19'), '0.10.19'
-
   describe "start(200)", ->
 
     it "polls about 5 times in 1000ms", (done) ->
