@@ -19,7 +19,7 @@
     "superagent": "1.3.0"
   },
   "engines": {
-    "node": "5.1.1"
+    "node": "6.9.4"
   },
   "repository": {
     "type": "git",
