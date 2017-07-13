@@ -51,7 +51,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
+          assert.equal(res.text.charAt(0), '8');
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -62,7 +62,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
+          assert.equal(res.text.charAt(0), '8');
           done()
 
   describe "GET /node/unstable", ->
@@ -75,7 +75,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
+          assert.equal(res.text.charAt(0), '8');
           done()
 
     it "works with a failing endpoint", (done) ->
@@ -86,7 +86,7 @@ describe "Node Routes", ->
         .end (err, res) ->
           return done(err) if err
           assert semver.valid(res.text)
-          assert.equal(res.text.charAt(0), '7');
+          assert.equal(res.text.charAt(0), '8');
           done()
 
   describe "GET /node/resolve/0.8.x", ->
