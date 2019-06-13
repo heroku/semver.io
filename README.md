@@ -1,3 +1,5 @@
+# 👷‍♀️This project is in maintenance mode. It is still used by older buildpacks, but is no longer being actively updated.
+
 # semver.io
 
 semver.io is a plaintext and JSON webservice
