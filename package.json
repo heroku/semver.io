@@ -9,7 +9,7 @@
     "coffee-script": "1.8.0",
     "cors": "2.5.2",
     "express": "4.10.1",
-    "lodash": "3.10.1",
+    "lodash": "4.17.21",
     "logfmt": "1.2.0",
     "marked": "0.3.2",
     "newrelic": "1.14.1",
