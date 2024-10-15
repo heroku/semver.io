@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "array-sugar": "1.0.0",
-    "body-parser": "1.9.2",
+    "body-parser": "1.20.3",
     "coffee-script": "1.8.0",
     "cors": "2.5.2",
     "express": "4.10.1",
