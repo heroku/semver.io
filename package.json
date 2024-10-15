@@ -8,7 +8,7 @@
     "body-parser": "1.9.2",
     "coffee-script": "1.8.0",
     "cors": "2.5.2",
-    "express": "4.10.1",
+    "express": "4.20.0",
     "lodash": "3.10.1",
     "logfmt": "1.2.0",
     "marked": "0.3.2",
